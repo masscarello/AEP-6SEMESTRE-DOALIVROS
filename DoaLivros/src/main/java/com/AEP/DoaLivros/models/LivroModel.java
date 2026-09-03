@@ -15,6 +15,6 @@ public class LivroModel {
     private String autor;
     private String categoria;
     private String conservacao;
-    private Boolean disponivel;
+    private boolean disponivel;
     private String idDoador;
 }
