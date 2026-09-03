@@ -26,7 +26,7 @@ public class LivroService {
         return livroRepository.findByDisponivelTrue();
     }
 
-    public Optional<LivroModel> busarPorId(String id) {
+    public Optional<LivroModel> buscarPorId(String id) {
         return livroRepository.findById(id);
     }
 
