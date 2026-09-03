@@ -8,5 +8,5 @@ import java.util.List;
 public interface LivroRepository extends MongoRepository<LivroModel, String> {
 
     List<LivroModel> findByDisponivelTrue();
-    List<LivroModel> findByIdCategoria(String categoria);
+    List<LivroModel> findByCategoria(String categoria);
 }
