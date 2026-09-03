@@ -1,4 +1,7 @@
 package com.AEP.DoaLivros.repositories;
 
-public class UsuarioRepository {
+import com.AEP.DoaLivros.models.UsuarioModel;
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+public interface UsuarioRepository extends MongoRepository<UsuarioModel,String> {
 }
