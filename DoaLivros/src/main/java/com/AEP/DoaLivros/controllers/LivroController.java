@@ -17,7 +17,7 @@ public class LivroController {
 
     @PostMapping
     public ResponseEntity<LivroModel> cadastrar(LivroModel livro){
-        return ResponseEntity.ok(livroService.cadastrar(livro));
+        return ResponseEntity.status(201).body(livroService.cadastrar(livro));
     }
 
     @GetMapping
