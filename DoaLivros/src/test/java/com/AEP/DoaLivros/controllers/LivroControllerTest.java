@@ -34,7 +34,7 @@ public class LivroControllerTest {
     @Test
     void deveCadastrarLivroERetornarOk() {
         LivroModel livro = new LivroModel();
-        livro.setTitulo("Machado de Assis");
+        livro.setTggitulo("Machado de Assis");
         when(livroService.cadastrar(livro)).thenReturn(livro);
 
         ResponseEntity<LivroModel> resposta = livroController.cadastrar(livro);
