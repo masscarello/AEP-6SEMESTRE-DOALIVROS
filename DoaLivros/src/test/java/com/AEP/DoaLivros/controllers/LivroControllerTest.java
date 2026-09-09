@@ -39,7 +39,7 @@ public class LivroControllerTest {
 
         ResponseEntity<LivroModel> resposta = livroController.cadastrar(livro);
 
-        assertEquals(HttpStatus.OK, resposta.getStatusCode());
+        assertEquals(HttpStatus.CREATED, resposta.getStatusCode());
         assertEquals("Machado de Assis", resposta.getBody().getTitulo());
         verify(livroService, times(1)).cadastrar(livro);
     }
