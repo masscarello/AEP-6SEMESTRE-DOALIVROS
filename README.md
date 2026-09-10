@@ -66,9 +66,9 @@ DoaLivros/target/site/jacoco/index.html
 
 ## Cobertura atual
 
-- Total: **75%** ✅
+- Total: **79%** ✅
 - Controllers: 100%
-- Services: 93%
+- Services: 96%
 
 ## Estrutura do projeto
 
