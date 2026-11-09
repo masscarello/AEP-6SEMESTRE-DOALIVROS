@@ -16,7 +16,6 @@ public class PedidoModel {
     private StatusPedido status;
     private LocalDateTime dataPedido;
 
-    // Subdocumento: snapshot do livro no momento do pedido
     private LivroSnapshot livroSnapshot;
 
     public PedidoModel() {
