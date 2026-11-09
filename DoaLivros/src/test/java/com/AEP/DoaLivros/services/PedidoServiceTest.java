@@ -1,6 +1,8 @@
 package com.AEP.DoaLivros.services;
 
+import com.AEP.DoaLivros.models.LivroModel;
 import com.AEP.DoaLivros.models.PedidoModel;
+import com.AEP.DoaLivros.repositories.LivroRepository;
 import com.AEP.DoaLivros.repositories.PedidoRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,6 +21,9 @@ class PedidoServiceTest {
     @Mock
     private PedidoRepository pedidoRepository;
 
+    @Mock
+    private LivroRepository livroRepository;
+
     @InjectMocks
     private PedidoService pedidoService;
 
@@ -32,6 +37,7 @@ class PedidoServiceTest {
         PedidoModel pedido = new PedidoModel();
         pedido.setIdLivro("livro123");
         pedido.setIdUsuario("usuario123");
+        when(livroRepository.findById("livro123")).thenReturn(Optional.empty());
         when(pedidoRepository.save(pedido)).thenReturn(pedido);
 
         PedidoModel resultado = pedidoService.criar(pedido);
@@ -39,6 +45,31 @@ class PedidoServiceTest {
         assertEquals(PedidoModel.StatusPedido.PENDENTE, resultado.getStatus());
         assertNotNull(resultado.getDataPedido());
         verify(pedidoRepository, times(1)).save(pedido);
+    }
+
+    @Test
+    void deveCriarPedidoComSnapshotDoLivro() {
+        LivroModel livro = new LivroModel();
+        livro.setId("livro123");
+        livro.setTitulo("Dom Casmurro");
+        livro.setAutor("Machado de Assis");
+        livro.setCategoria("Literatura");
+        livro.setConservacao("Bom");
+
+        PedidoModel pedido = new PedidoModel();
+        pedido.setIdLivro("livro123");
+        pedido.setIdUsuario("usuario123");
+
+        when(livroRepository.findById("livro123")).thenReturn(Optional.of(livro));
+        when(pedidoRepository.save(pedido)).thenReturn(pedido);
+
+        PedidoModel resultado = pedidoService.criar(pedido);
+
+        assertNotNull(resultado.getLivroSnapshot());
+        assertEquals("Dom Casmurro", resultado.getLivroSnapshot().getTitulo());
+        assertEquals("Machado de Assis", resultado.getLivroSnapshot().getAutor());
+        assertEquals("Literatura", resultado.getLivroSnapshot().getCategoria());
+        assertEquals("Bom", resultado.getLivroSnapshot().getConservacao());
     }
 
     @Test
