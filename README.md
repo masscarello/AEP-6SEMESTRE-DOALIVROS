@@ -89,7 +89,27 @@ DoaLivros/src/
 
 - `livros` — cadastro de livros disponíveis para doação
 - `usuarios` — cadastro de doadores e receptores
-- `pedidos` — solicitações de doação
+- `pedidos` — solicitações de doação, com subdocumento aninhado `livroSnapshot`
+
+### Subdocumento aninhado — LivroSnapshot
+
+Ao criar um pedido, os dados do livro são copiados e salvos diretamente dentro do documento de pedido no MongoDB (sem referência externa). Isso garante que o histórico do pedido não seja afetado por alterações futuras no livro.
+
+```json
+{
+  "_id": "...",
+  "idLivro": "abc123",
+  "idUsuario": "xyz456",
+  "status": "PENDENTE",
+  "dataPedido": "2026-11-11T10:00:00",
+  "livroSnapshot": {
+    "titulo": "Dom Casmurro",
+    "autor": "Machado de Assis",
+    "categoria": "Literatura",
+    "conservacao": "Bom"
+  }
+}
+```
 
 ## Equipe
 
